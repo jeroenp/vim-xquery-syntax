@@ -1,0 +1,18 @@
+XQuery syntax file for VIM
+
+Motivation: 
+
+This syntax file differs from Jean Marc Vanel's syntax in that it doesn't use
+the XML syntax as a base. I find the XML highlighting distracting when
+programming; Since you're only working with snippets of XML at a time, I don't
+think the XML highlighting helps.  Instead, the code structure is highlighted.
+It's easy to spot variable references inside XML literals.  I try to stay close
+to the C syntax highlighting. 
+
+Background: 
+
+The syntax file has been used while working on a 2000+ lines project with
+numerous modules. The syntax file is by no means complete, but I think that
+it's good enough to release. 
+
+-- Jeroen
