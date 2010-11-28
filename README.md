@@ -29,17 +29,28 @@ are not marked as keyword, instead they’re treated as any other function.
 DETAILS
 =======
 
+Reference
+---------
+See the XQuery grammar specification at http://www.w3.org/TR/xquery/#nt-bnf
+
+Words 
+-----
+XQuery uses NCNames for most keywords, and as it happens that sometimes even
+includes dots. Which is totally weird for people coming from other programming
+languages. This syntax file uses standard `\k` with minus and dot, `-.`.
+
 Comments
 --------
-
 XQuery Comments are balanced, so "(: (: :)" leaves a comment open (Mark Logic 4.0)
-
 XML Comments are supported like any other literal piece of XML. So yes, these
 are part of the output and shouldn’t be used to document your code. 
 
+XML rendering 
+-------------
+The start tag is also used for end tags in Processing Instructions and CDATA sections. 
+
 TODO
 ----
-
  * Function names should be marked as xqyFunction
  * xs:string is currently marked as a "type", but that needs a more generic
    solution that also works for sequences and matchers like

@@ -8,38 +8,41 @@ if exists("b:current_syntax")
    finish
 endif
 
-setlocal iskeyword=@,-,48-57,_,192-255
 
-" Regions ---------------------
-syn region xqyString           start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ keepend
-syn region xqyBlock            start=/{/ end=/}/ contains=xqyBlock,xqyString,xqyFLWOR,xqyConditional,xqyConstructor,xqyVariable,xqyComment,xqyStartTag,xqyEndTag
-syn region xqyAttrString       start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ contained contains=xqyBlock
-syn region xqyStartTag         start=#<\([= \/]\)\@!# end=#># contains=xqyAttrString
-syn region xqyEndTag           start=#</# end=#>#
+setlocal iskeyword+=-,.
 
-" Prolog ----------------------
-syn keyword xqyPrologKeyword   xquery version
-syn keyword xqyPrologKeyword   module namespace import at
-syn match   xqyDeclare         /declare/ nextgroup=xqyDeclareFun,xqyDeclareVar skipwhite
-syn match   xqyDeclareVar      /variable/ nextgroup=xqyVariable skipwhite
-syn match   xqyDeclareFun      /function/ nextgroup=xqyFunction skipwhite
 
-syn match   xqyVariable        /\$\k\+/
-syn match   xqyFunction        /\k\+()/ " FIXME 
+syn match   xqyQName            /\k\+\(:\k\+\)\?/ contained contains=NONE transparent 
+syn region  xqyBlock            start=/{/ end=/}/ contains=ALLBUT,@xqyPrologStatements
 
-" Type ------------------------
-syn keyword xqyTypeSigKeyword  as nextgroup=xqyType skipwhite
-syn match   xqyType            /xs:\w\+/ contained
-syn keyword xqyVariableExt     external
+syn region  xqyString           start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ keepend
+syn region  xqyAttrString       start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ contained contains=xqyBlock
+syn region  xqyStartTag         start=#<\([= \/]\)\@!# end=#># contains=xqyAttrString
+syn region  xqyEndTag           start=#</# end=#># contains=xqyQName
 
-" FLWOR -----------------------
-syn keyword xqyFLWOR           for in let where order by return
-syn keyword xqyConstructor     attribute
-syn match   xqyConstructor     /\(element\|comment\|processing-instruction\)\ze\s/
-syn keyword xqyConditional     if then else
-syn keyword xqyConditional     typeswitch case
+syn keyword xqyPrologKeyword    xquery version module namespace import at external
+syn keyword xqyDecl             declare nextgroup=xqyDeclFun,xqyDeclVar,xqyDeclCons skipwhite
+syn keyword xqyDeclCons         construction nextgroup=xqyDeclConsOpt skipwhite
+syn keyword xqyDeclConsOpt      strip preserve
+syn keyword xqyDeclVar          variable nextgroup=xqyVariable skipwhite
+syn keyword xqyDeclFun          function nextgroup=xqyFunction skipwhite
 
-" Commenting -------------------
+syn match   xqyVariable         /\$\k\+/
+syn match   xqyFunction         /\k\+\(:\k\+\)\?()/ " FIXME 
+syn keyword xqyTypeSigKeyword   as nextgroup=xqyType skipwhite
+syn match   xqyType             /\k+\(:\k\+\)\?/ contained
+syn cluster xqyPrologStatements contains=xqyPrologKeyword,xqyDecl,xqyDeclVar,xyDeclFun,xqyDeclCons,xqyDeclConsOpt
+
+syn keyword xqyFLWOR            for in let where order by return
+
+syn keyword xqyConstructor      attribute
+syn match   xqyConstructor      /\(element\|comment\|processing-instruction\)\ze\s/
+
+syn keyword xqyConditional      if then else
+syn keyword xqyConditional      or and 
+syn keyword xqyConditional      typeswitch default
+syn keyword xqyConditional      case
+
 syn keyword xqyTodo             TODO XXX FIXME contained
 syn match   xqyDocKeyword       display /@\(version\|since\|deprecated\|error\|return\|param\|author\|see\)/ contained nextgroup=xqyVariable skipwhite
 syn region  xqyDocComment       start="(:\~" end=":)" contains=xqyTodo,xqyDocKeyword,xqyVariable,xqyComment,xqyDocComment fold
@@ -56,10 +59,12 @@ hi def link xqyDocComment       Comment
 hi def link xqyDocKeyword       SpecialComment
 hi def link xqyTodo             Todo
 
+hi def link xqyDecl             Define
+hi def link xqyDeclCons         Define
+hi def link xqyDeclConsOpt      Define
+hi def link xqyDeclFun          Define
+hi def link xqyDeclVar          Define
 hi def link xqyPrologKeyword    PreProc
-hi def link xqyDeclare          Define
-hi def link xqyDeclareVar       Define
-hi def link xqyDeclareFun       Define
 hi def link xqyTypeSigKeyword   PreProc
 hi def link xqyVariableExt      PreProc
 
