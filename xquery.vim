@@ -8,6 +8,8 @@ if exists("b:current_syntax")
    finish
 endif
 
+setlocal iskeyword=@,-,48-57,_,192-255
+
 " Regions ---------------------
 syn region xqyString           start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ keepend
 syn region xqyBlock            start=/{/ end=/}/ contains=xqyBlock,xqyString,xqyFLWOR,xqyConditional,xqyConstructor,xqyVariable,xqyComment,xqyStartTag,xqyEndTag
@@ -67,3 +69,5 @@ hi def link xqyConditional      Conditional
 
 hi def link xqyVariable         Identifier
 hi def link xqyType             Type
+
+let b:current_syntax = "xquery"
