@@ -3,27 +3,28 @@ XQuery syntax file for VIM
 
 Motivation
 
-This syntax file differs from Jean-Marc Vanel's syntax file in that it doesn't
+This syntax file differs from Jean-Marc Vanel’s syntax file in that it doesn’t
 use the XML syntax as a base. I find the XML highlighting distracting when
-programming; Since you're only working with snippets of XML at a time, I don't
+programming; Since you’re only working with snippets of XML at a time, I don’t
 think the XML highlighting helps. Instead, the code structure is highlighted.
-It's easy to spot variable references inside XML literals this way, for
+It’s easy to spot variable references inside XML literals this way, for
 example.
 
 Background
 
 The syntax file has been used while working on a 2000+ lines project with
 numerous modules where I found that the xquery syntax that currently comes with
-VIM didn't work. This syntax file is by no means complete, but I think that
-it's good enough to release. 
+VIM didn’t work. This syntax file is by no means complete, but I think that
+it’s good enough to release. 
 
-I try to stay close to the way VIM does C syntax highlighting; For variable
-names I use the \k character class for keywords, which may not correspond to
-the XQuery specification but in practice this will be what most people will
-want to use. 
+I try to stay close to the way VIM does C syntax highlighting. That makes me
+most comfortable with working with large XQuery files. For variable names I use
+the `\k` character class for keywords, which may not correspond to the XQuery
+specification but in practice this will be what most people will want to use.
+Standard library functions, such as those from XPath, like `fn:document-uri`,
+are not marked as keyword, instead they’re treated as any other function. 
 
 -- Jeroen
-
 
 DETAILS
 =======
@@ -34,7 +35,7 @@ Comments
 XQuery Comments are balanced, so "(: (: :)" leaves a comment open (Mark Logic 4.0)
 
 XML Comments are supported like any other literal piece of XML. So yes, these
-are part of the output and shouldn't be used to document your code. 
+are part of the output and shouldn’t be used to document your code. 
 
 TODO
 ----

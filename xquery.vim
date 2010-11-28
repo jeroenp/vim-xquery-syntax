@@ -25,7 +25,7 @@ syn match   xqyDeclareVar      /variable/ nextgroup=xqyVariable skipwhite
 syn match   xqyDeclareFun      /function/ nextgroup=xqyFunction skipwhite
 
 syn match   xqyVariable        /\$\k\+/
-syn match   xqyFunction        /foo()/
+syn match   xqyFunction        /\k\+()/ " FIXME 
 
 " Type ------------------------
 syn keyword xqyTypeSigKeyword  as nextgroup=xqyType skipwhite
