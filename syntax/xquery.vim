@@ -2,15 +2,16 @@
 " 
 " Language:    XQuery
 " Maintainer:  Jeroen Pulles <jeroen.pulles@redslider.net>
-" Last Change: 22 November 2010
-"
+" Last Change: 29 November 2010
+" 
 if exists("b:current_syntax")
    finish
 endif
 
+let b:current_syntax = "xquery"
 
-setlocal iskeyword+=-,.
-
+setlocal iskeyword+=.,-
+" NOTE that there's also a ftplugin for additional customization for XQuery. 
 
 syn match   xqyQName            /\k\+\(:\k\+\)\?/ contained contains=NONE transparent 
 syn region  xqyBlock            start=/{/ end=/}/ contains=ALLBUT,@xqyPrologStatements
@@ -45,7 +46,7 @@ syn keyword xqyConditional      case
 
 syn keyword xqyTodo             TODO XXX FIXME contained
 syn match   xqyDocKeyword       display /@\(version\|since\|deprecated\|error\|return\|param\|author\|see\)/ contained nextgroup=xqyVariable skipwhite
-syn region  xqyDocComment       start="(:\~" end=":)" contains=xqyTodo,xqyDocKeyword,xqyVariable,xqyComment,xqyDocComment fold
+syn region  xqyDocComment       start="(:\~" end=":)" contains=xqyTodo,xqyDocKeyword,xqyVariable,xqyComment,xqyDocComment,@Spell fold
 syn region  xqyComment          start="(\:\(\~\)\@!" end="\:)" contains=xqyTodo,xqyComment,xqyDocComment,@Spell fold
 
 " ==============================
@@ -74,5 +75,3 @@ hi def link xqyConditional      Conditional
 
 hi def link xqyVariable         Identifier
 hi def link xqyType             Type
-
-let b:current_syntax = "xquery"

@@ -31,7 +31,7 @@ DETAILS
 
 Reference
 ---------
-See the XQuery grammar specification at http://www.w3.org/TR/xquery/#nt-bnf
+See the XQuery grammar specification at [Appendix A XQuery Grammar](http://www.w3.org/TR/xquery/#nt-bnf)
 
 Words 
 -----
@@ -41,9 +41,10 @@ languages. This syntax file uses standard `\k` with minus and dot, `-.`.
 
 Comments
 --------
-XQuery Comments are balanced, so "(: (: :)" leaves a comment open (Mark Logic 4.0)
-XML Comments are supported like any other literal piece of XML. So yes, these
-are part of the output and shouldn’t be used to document your code. 
+XQuery comments are balanced, so `(: (: :)` leaves a comment open; At least,
+this is how it works in Mark Logic 4. XML Comments are supported like any
+other literal piece of XML. So yes, these are part of the output and shouldn’t
+be used to document your code. 
 
 XML rendering 
 -------------
@@ -60,4 +61,6 @@ TODO
    nextgroup
  * {} could be marked as a fold, but my short experiments with it gave
    problems in balancing the brackets when trying the fold. 
+ * Specify all declare variations and make sure that these only work in the
+   prolog and not in blocks. 
 
