@@ -22,19 +22,22 @@ syn region  xqyStartTag         start=#<\([= \/]\)\@!# end=#># contains=xqyAttrS
 syn region  xqyEndTag           start=#</# end=#># contains=xqyQName
 
 syn keyword xqyPrologKeyword    xquery version module namespace import at external
-syn keyword xqyDecl             declare nextgroup=xqyDeclFun,xqyDeclVar,xqyDeclCons skipwhite
+syn keyword xqyDecl             declare nextgroup=xqyOption,xqyContext,xqyDeclFun,xqyDeclVar,xqyDeclCons skipwhite
 syn keyword xqyDeclCons         construction nextgroup=xqyDeclConsOpt skipwhite
 syn keyword xqyDeclConsOpt      strip preserve
-syn keyword xqyDeclVar          variable nextgroup=xqyVariable skipwhite
+syn keyword xqyDeclVar          variable nextgroup=xqyVariable external skipwhite
+syn keyword xqyContext          context item skipwhite
+syn keyword xqyOption           option skipwhite
 syn keyword xqyDeclFun          function nextgroup=xqyFunction skipwhite
 
 syn match   xqyVariable         /\$\k\+/
+syn match   xqyAnnotation       /%\k\+\(:\k\+\)\?/
 syn match   xqyFunction         /\k\+\(:\k\+\)\?()/ " FIXME 
 syn keyword xqyTypeSigKeyword   as nextgroup=xqyType skipwhite
 syn match   xqyType             /\k+\(:\k\+\)\?/ contained
 syn cluster xqyPrologStatements contains=xqyPrologKeyword,xqyDecl,xqyDeclVar,xyDeclFun,xqyDeclCons,xqyDeclConsOpt
 
-syn keyword xqyFLWOR            for in let where order by return
+syn keyword xqyFLWOR            for in let where group by order by return
 
 syn keyword xqyConstructor      attribute
 syn match   xqyConstructor      /\(element\|comment\|processing-instruction\)\ze\s/
@@ -42,7 +45,8 @@ syn match   xqyConstructor      /\(element\|comment\|processing-instruction\)\ze
 syn keyword xqyConditional      if then else
 syn keyword xqyConditional      or and 
 syn keyword xqyConditional      typeswitch default
-syn keyword xqyConditional      case
+syn keyword xqyConditional      switch case default
+syn keyword xqyConditional      try catch
 
 syn keyword xqyTodo             TODO XXX FIXME contained
 syn match   xqyDocKeyword       display /@\(version\|since\|deprecated\|error\|return\|param\|author\|see\)/ contained nextgroup=xqyVariable skipwhite
@@ -65,6 +69,8 @@ hi def link xqyDeclCons         Define
 hi def link xqyDeclConsOpt      Define
 hi def link xqyDeclFun          Define
 hi def link xqyDeclVar          Define
+hi def link xqyContext          Define
+hi def link xqyOption           Define
 hi def link xqyPrologKeyword    PreProc
 hi def link xqyTypeSigKeyword   PreProc
 hi def link xqyVariableExt      PreProc
@@ -74,4 +80,5 @@ hi def link xqyConstructor      Keyword
 hi def link xqyConditional      Conditional
 
 hi def link xqyVariable         Identifier
+hi def link xqyAnnotation       Identifier
 hi def link xqyType             Type
