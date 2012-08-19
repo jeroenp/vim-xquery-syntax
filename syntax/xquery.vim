@@ -2,7 +2,7 @@
 " 
 " Language:    XQuery
 " Maintainer:  Jeroen Pulles <jeroen.pulles@redslider.net>
-" Last Change: 29 November 2010
+" Last Change: 19 August 2012
 " 
 if exists("b:current_syntax")
    finish
@@ -44,7 +44,7 @@ syn match   xqyConstructor      /\(element\|comment\|processing-instruction\)\ze
 
 syn keyword xqyConditional      if then else
 syn keyword xqyConditional      or and 
-syn keyword xqyConditional      typeswitch default
+syn keyword xqyConditional      typeswitch
 syn keyword xqyConditional      switch case default
 syn keyword xqyConditional      try catch
 
