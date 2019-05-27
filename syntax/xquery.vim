@@ -16,8 +16,8 @@ setlocal iskeyword+=.,-
 syn match   xqyQName            /\k\+\(:\k\+\)\?/ contained contains=NONE transparent 
 syn region  xqyBlock            start=/{/ end=/}/ contains=ALLBUT,@xqyPrologStatements
 
-syn region  xqyString           start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ keepend
-syn region  xqyAttrString       start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ contained contains=xqyBlock
+syn region  xqyString           start=/\z(['"]\)/ skip=/\z1\z1/ end=/\z1/ keepend
+syn region  xqyAttrString       start=/\z(['"]\)/ skip=/\z1\z1/ end=/\z1/ contained contains=xqyBlock
 syn region  xqyStartTag         start=#<\([= \/]\)\@!# end=#># contains=xqyAttrString
 syn region  xqyEndTag           start=#</# end=#># contains=xqyQName
 
